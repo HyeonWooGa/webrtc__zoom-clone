@@ -27,12 +27,15 @@ const server = http.createServer(app);
 // WebSocket 서버 생성
 const wss = new WebSocket.Server({ server });
 
-// socket : 연결된 브라우저를 뜻합니다.
-function handleConnection(socket) {
-  console.log(socket);
-}
-
 // on 이 "connection" 이벤트를 기다립니다.
-wss.on("connection", handleConnection);
+// socket : 연결된 브라우저를 뜻합니다.
+wss.on("connection", (socket) => {
+  console.log("Connected to Browser ✅");
+  socket.on("close", () => console.log("Disconnected from the Browser ❌"));
+  socket.on("message", (message) =>
+    console.log("New message:", message.toString())
+  );
+  socket.send("hello from the server");
+});
 
 server.listen(3000, handleListen);
