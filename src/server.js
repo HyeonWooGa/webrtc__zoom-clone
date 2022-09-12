@@ -34,11 +34,30 @@ const sockets = [];
 // socket : 연결된 브라우저를 뜻합니다.
 wss.on("connection", (socket) => {
   sockets.push(socket);
+  socket["nickname"] = "익명";
   console.log("Connected to Browser ✅");
   socket.on("close", () => console.log("Disconnected from the Browser ❌"));
-  socket.on("message", (message) =>
-    sockets.forEach((aSocket) => aSocket.send(message.toString()))
-  );
+  socket.on("message", (msg) => {
+    const message = JSON.parse(msg);
+    //console.log(message, msg.toString());
+    switch (message.type) {
+      case "new_message":
+        sockets.forEach((aSocket) =>
+          aSocket.send(`${socket.nickname}: ${message.payload}`)
+        );
+        break;
+      case "nickname":
+        socket["nickname"] = message.payload;
+        break;
+    }
+
+    /* if (message.type === "new_message") {
+      sockets.forEach((aSocket) => aSocket.send(message.payload));
+    } else if (message.type === "nickname") {
+      console.log(message.payload);
+      //socket["nickname"] = message.payload;
+    } */
+  });
 });
 
 server.listen(3000, handleListen);

@@ -3,7 +3,14 @@ const socket = new WebSocket(`ws://${window.location.host}`);
 
 // DOM
 const messageList = document.querySelector("ul");
-const messageForm = document.querySelector("form");
+const nickForm = document.querySelector("#nick");
+const messageForm = document.querySelector("#message");
+
+function makeMessage(type, payload) {
+  const message = { type, payload };
+
+  return JSON.stringify(message);
+}
 
 socket.addEventListener("open", () => {
   console.log("Connected to Server ✅");
@@ -19,12 +26,19 @@ socket.addEventListener("close", () => {
   console.log("Disconnectes from Server ❌");
 });
 
-function handleSubmit(event) {
+function handNickSubmit(event) {
+  event.preventDefault();
+  const input = nickForm.querySelector("input");
+  socket.send(makeMessage("nickname", input.value));
+}
+
+function handleMessageSubmit(event) {
   event.preventDefault();
   const input = messageForm.querySelector("input");
   // console.log(input.value);
-  socket.send(input.value);
+  socket.send(makeMessage("new_message", input.value));
   input.value = "";
 }
 
-messageForm.addEventListener("submit", handleSubmit);
+nickForm.addEventListener("submit", handNickSubmit);
+messageForm.addEventListener("submit", handleMessageSubmit);
