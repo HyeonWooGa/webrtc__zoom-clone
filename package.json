@@ -1,7 +1,7 @@
 {
-  "name": "webrtc__zoom-clone",
+  "name": "websocket__real-time-chat",
   "version": "1.0.0",
-  "description": "Zoom Clone using WebRTC and WebSockets",
+  "description": "Real Time Chat using WebSocket",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/HyeonWooGa/webrtc__zoom-clone.git"
@@ -11,9 +11,9 @@
     "dev": "nodemon"
   },
   "bugs": {
-    "url": "https://github.com/HyeonWooGa/webrtc__zoom-clone/issues"
+    "url": "https://github.com/HyeonWooGa/websocket__real-time-chat/issues"
   },
-  "homepage": "https://github.com/HyeonWooGa/webrtc__zoom-clone#readme",
+  "homepage": "https://github.com/HyeonWooGa/websocket__real-time-chat#readme",
   "devDependencies": {
     "@babel/cli": "^7.18.10",
     "@babel/core": "^7.18.13",
