@@ -1,16 +1,10 @@
-# Zoom Clone
+# Real Time Chat
 
 ## 목적
 
-- WebSocket, Socket.io, WebRTC 학습
+- WebSocket 학습
 
 ## 기술 스택
-
-- WebSocket
-
-- Socket.io
-
-- WebRTC
 
 - Express
 
